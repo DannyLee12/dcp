@@ -67,17 +67,6 @@ def prefix_products(l: list) -> list:
     return result
 
 
-def more_improved(l: list) -> list:
-    """
-    Can we do it in one pass through?
-    Space complexity might get poor but we can store the value at each position
-    while we loop through the list once
-    """
-    newlist = [1] * len(l)
-    for i, x in enumerate(l):
-        pass
-
-
 if __name__ == '__main__':
     assert brute_force([3, 2, 1]) == [2, 3, 6]
     assert brute_force([1, 2, 3, 4, 5]) == [120, 60, 40, 30, 24]
