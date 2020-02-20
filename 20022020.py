@@ -28,13 +28,11 @@ def brute_force(l: list) -> list:
 def improved(l: list) -> list:
     """Consider keeping the values and calculating each only once"""
     value_0 = 1
-    for i, x in enumerate(l):
-        if i == 0:
-            continue
-        value_0 *= x
-    value = l[0] * value_0
+    for i in l:
+        value_0 *= i
 
-    return [value/x for x in l]
+
+    return [value_0/x for x in l]
 
 
 def more_improved(l: list) -> list:
@@ -45,8 +43,7 @@ def more_improved(l: list) -> list:
     """
     newlist = [1] * len(l)
     for i, x in enumerate(l):
-        newlist[i] = x for x in newlist
-
+        pass
 
 
 if __name__ == '__main__':
@@ -54,5 +51,3 @@ if __name__ == '__main__':
     assert brute_force([1, 2, 3, 4, 5]) == [120, 60, 40, 30, 24]
     assert improved([3, 2, 1]) == [2, 3, 6]
     assert improved([1, 2, 3, 4, 5]) == [120, 60, 40, 30, 24]
-    assert more_improved([1, 2, 3, 4, 5]) == [120, 60, 40, 30, 24]
-    print([1,2,3] * 3)
