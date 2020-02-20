@@ -31,8 +31,40 @@ def improved(l: list) -> list:
     for i in l:
         value_0 *= i
 
-
     return [value_0/x for x in l]
+
+
+def prefix_products(l: list) -> list:
+    """
+    Storing the prefix products up to i and
+    the suffix products from i onwards.
+    Solves the case where we aren't allowed to use division
+    """
+    prefixs = []
+    suffixes = []
+    n = len(l) - 1
+    for i, x in enumerate(l):
+        if prefixs:
+            prefixs.append(prefixs[-1] * x)
+        else:
+            prefixs.append(x)
+        if suffixes:
+            suffixes.append(suffixes[-1] * l[n - i])
+        else:
+            suffixes.append(l[n - i])
+
+    suffixes = suffixes[::-1]
+
+    result = []
+    for i in range(n + 1):
+        if i == 0:
+            result.append(suffixes[1])
+        elif i == n:
+            result.append(prefixs[i - 1])
+        else:
+            result.append(prefixs[i - 1] * suffixes[i + 1])
+
+    return result
 
 
 def more_improved(l: list) -> list:
@@ -51,3 +83,5 @@ if __name__ == '__main__':
     assert brute_force([1, 2, 3, 4, 5]) == [120, 60, 40, 30, 24]
     assert improved([3, 2, 1]) == [2, 3, 6]
     assert improved([1, 2, 3, 4, 5]) == [120, 60, 40, 30, 24]
+    assert prefix_products([1, 2, 3, 4, 5]) == [120, 60, 40, 30, 24]
+    assert prefix_products([3, 2, 1]) == [2, 3, 6]
