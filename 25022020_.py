@@ -9,32 +9,22 @@ You can assume that the messages are decodable. For example, '001' is not allowe
 """
 
 
-def decode(message: str) -> int:
-    """Get the number of ways a message can be decoded"""
-    messages = []
+def num_encodings(s):
+    if s.startswith('0'):
+        return 0
+    elif len(s) <= 1:  # This covers empty string
+        return 1
+
     total = 0
-    n = len(message)
-    r = [str(x) for x in range(26)]
-    for slice_size in range(2, n + 1):
-        decodable = True
-        for i, _ in enumerate(message):
-            if i + slice_size > n:
-                continue
-            s = message[i:i + slice_size]
-            s2, s3 = None, None
-            if n % slice_size != 0:
-                s2 = message[i + slice_size:]
-                s3 = message[:i]
-                if s2 and s2 not in r:
-                    decodable = False
-                elif s3 and s3 not in r:
-                    decodable = False
-            if s not in r:
-                decodable = False
-        if decodable:
-            total += 2
-    return total + 1
+
+    if int(s[:2]) <= 26:
+        total += num_encodings(s[2:])
+
+    total += num_encodings(s[1:])
+
+    return total
 
 
 if __name__ == '__main__':
-    print(decode('27'))
+    print(num_encodings('1111'))
+
