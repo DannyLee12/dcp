@@ -48,12 +48,12 @@ def two_options(l: list) -> int:
     return total2
 
 
-def rec(l: list, counter: int=0) -> int:
+def rec(l: list, start: int=0) -> int:
     """
     Consider a recursive strategy - working for this case
     Time complexity seems alright actually?
+    Space Complexity TBC
     """
-    counter += 1
     if len(l) == 1:
         return l[0]
     # Start at 0:
@@ -62,10 +62,11 @@ def rec(l: list, counter: int=0) -> int:
             return l[0]
         else:
             return l[1]
-    print(counter)
-    return l[0] + rec(l[2:], counter)
+    return l[start] + rec(l[start + 2:])
 
 
 if __name__ == '__main__':
     print(rec([2, 4, 6, 2, 5]))
+    print(rec([2, 4, 6, 2, 5], 1))
     print(rec([5, 1, 1, 5]))
+    print(rec([5, 1, 1, 5, 5, 6, 7, 8, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0]))
