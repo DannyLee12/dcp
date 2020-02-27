@@ -16,6 +16,18 @@ g2 = {"1": ["2", "3"],
       "8": ["7"],
       "0": ["5", "3"]}
 
+graph1 = {
+    'A' : ['B','S'],
+    'B' : ['A'],
+    'C' : ['D','E','F','S'],
+    'D' : ['C'],
+    'E' : ['C','H'],
+    'F' : ['C','G'],
+    'G' : ['F','S'],
+    'H' : ['E','G'],
+    'S' : ['A','C','G']
+}
+
 
 def bfs_shortest_path(graph: dict=g2, start: str = "1", goal: str = "4") -> list:
     """BFS shortest path, test conditions"""
@@ -57,3 +69,6 @@ def bfs(graph, initial):
 
 if __name__ == '__main__':
     print(bfs_shortest_path(g2, "1", "7"))
+    print("BFS", bfs(graph1, 'A'))
+    from algorithms.dfs import dfs
+    print("DFS", dfs(graph1, 'A'))
