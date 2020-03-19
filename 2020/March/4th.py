@@ -17,4 +17,4 @@ def random_stream(stream):
 
 
 if __name__ == '__main__':
-    print(random_stream([1,2,3,4,5]))
+    print(random_stream([1, 2, 3, 4, 5]))
