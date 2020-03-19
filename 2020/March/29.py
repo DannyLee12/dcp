@@ -36,7 +36,16 @@ def encode(s: str) -> str:
     return r_str
 
 
+def decode(s: str) -> str:
+    """Decode 4A -> AAAA"""
+    rs = ""
+    n = len(s)
+    for i in range(n):
+        if s[i].isdigit():
+            rs += s[i+1] * int(s[i])
+    return rs
+
+
 if __name__ == '__main__':
-    print(encode("AAAAABBBBCCC"))
-    print(encode("ABC"))
-    print(encode("AABBCC"))
+    assert "AAAAABBBBCCC" == decode(encode("AAAAABBBBCCC"))
+
