@@ -23,7 +23,6 @@ print out:
 
 def current_median(l: list):
     """Brute Force"""
-    total = 0
     new_list = []
     for i, x in enumerate(l):
         if not new_list:
