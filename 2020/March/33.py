@@ -35,7 +35,7 @@ def current_median(l: list):
         else:
             new_list.append(x)
             new_list.sort()
-        # x is the length of the new_list
+        # i is the length of the new_list
         if i == 0:
             print(new_list[0])
         elif i % 2 != 0:
