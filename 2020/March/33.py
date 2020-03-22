@@ -19,7 +19,6 @@ print out:
 2
 
 """
-
 from statistics import median
 
 
@@ -47,5 +46,14 @@ def current_median(l: list):
             print(new_list[i//2])
 
 
+def med(l: list):
+    """Use built-ins"""
+    new_list = []
+    for element in l:
+        new_list.append(element)
+        print(median(new_list))
+
+
 if __name__ == '__main__':
-    current_median([2, 1, 5, 7, 2, 0, 5])
+    # current_median([2, 1, 5, 7, 2, 0, 5])
+    med([2, 1, 5, 7, 2, 0, 5])
