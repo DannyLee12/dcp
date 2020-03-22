@@ -20,6 +20,8 @@ print out:
 
 """
 
+from statistics import median
+
 
 def current_median(l: list):
     """Brute Force"""
@@ -27,13 +29,15 @@ def current_median(l: list):
     for i, x in enumerate(l):
         if not new_list:
             new_list.append(x)
-        elif x < new_list[0]:
-            new_list.insert(0, x)
-        elif x > new_list[-1]:
-            new_list.append(x)
         else:
-            new_list.append(x)
-            new_list.sort()
+            flag = False
+            for j, item in enumerate(new_list):
+                if x <= item:
+                    new_list.insert(j, x)
+                    flag = True
+                    break
+            if not flag:
+                new_list.append(x)
         # i is the length of the new_list
         if i == 0:
             print(new_list[0])
