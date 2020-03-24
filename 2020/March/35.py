@@ -25,7 +25,8 @@ def order_array(l: list):
         elif l[R] == 'B':
             l[R], l[B] = l[B], l[R]
             B -= 1
-    return(l)
+
+    return l
 
 
 if __name__ == '__main__':
