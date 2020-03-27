@@ -1,16 +1,23 @@
 """
-Given the root to a binary search tree, find the second largest node in the
-tree.
+This problem was asked by Google.
+
+The power set of a set is the set of all its subsets. Write a function that,
+given a set, generates its power set.
+
+For example, given the set {1, 2, 3}, it should return {{}, {1}, {2}, {3},
+{1, 2}, {1, 3}, {2, 3}, {1, 2, 3}}.
+
+You may also use a list or array to represent a set.
 """
 
 
-class Tree:
-    def __init__(self, root, left=None, right=None):
-        self.root = root
-        self.left = left
-        self.right = right
+def power_set(s):
+    if not s:
+        return [[]]
+    result = power_set(s[1:])
+
+    return result + [subset + [s[0]] for subset in result]
 
 
 if __name__ == '__main__':
-    t = Tree(2, Tree(1), Tree(3))
-    print(t)
+    print(power_set([1, 2, 3]))
