@@ -22,6 +22,7 @@ def duplicates(l: list) -> int:
         if x in queue:
             if x in queue2:
                 queue.discard(x)
+                queue2.discard(x)
             else:
                 queue2.add(x)
         else:
