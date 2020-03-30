@@ -45,7 +45,6 @@ def bfs(start: str, graph: dict) -> list:
     paths.append(path)
 
     return min(paths)
-::wq
 
 if __name__ == '__main__':
     d = {}
