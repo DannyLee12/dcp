@@ -46,6 +46,7 @@ def bfs(start: str, graph: dict) -> list:
 
     return min(paths)
 
+
 if __name__ == '__main__':
     d = {}
     for x in [('SFO', 'HKO'), ('YYZ', 'SFO'), ('YUL', 'YYZ'), ('HKO', 'ORD')]:
