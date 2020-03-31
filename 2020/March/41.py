@@ -54,6 +54,7 @@ if __name__ == '__main__':
             d[x[0]].append(x[1])
         else:
             d[x[0]] = [x[1]]
+
     print(bfs("YUL", d))
     g = {}
     for y in [('A', 'B'), ('A', 'C'), ('B', 'C'), ('C', 'A')]:
@@ -61,4 +62,5 @@ if __name__ == '__main__':
             g[y[0]].append(y[1])
         else:
             g[y[0]] = [y[1]]
+
     print(bfs("A", g))
