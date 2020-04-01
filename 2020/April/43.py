@@ -14,31 +14,26 @@ Each method should run in constant time.
 
 class Stack:
     stack = []
-    len_stack = 0
-    pos_max = []
+    max_values = []
 
     def push(self, val):
         """Push a value onto the stack"""
         self.stack.append(val)
-        self.len_stack += 1
-        if not self.pos_max:
-            self.pos_max.append(0)
-        elif val > self.stack[self.pos_max[-1]]:
-            self.pos_max.append(self.len_stack - 1)
-        else:
-            self.pos_max.append(self.pos_max[-1])
+        if not self.max_values:
+            self.max_values.append(val)
+        self.max_values.append(max(val, self.max_values[-1]))
 
     def pop(self):
         """Pop the value off the top of the stack"""
-        max_value = self.stack[self.pos_max[-1]]
         val = self.stack.pop()
-        if val == max_value:
-            self.pos_max[-1] = self.pos_max[-2]
+        if val == self.max_values[-1]:
+            self.max_values.pop()
+
         return val
 
     def max(self):
         """return max"""
-        return self.stack[self.pos_max[-1]]
+        return self.max_values[-1]
 
 
 if __name__ == '__main__':
@@ -49,5 +44,5 @@ if __name__ == '__main__':
     s.push(4)
     print(s.pop())
     print(s.pop())
-    print(s.max())
+    print("Max", s.max())
     print(s.stack)
