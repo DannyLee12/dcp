@@ -12,28 +12,19 @@ Do this in O(N) time.
 """
 
 
-def max_sum(l: list) -> int:
-    """Return the largest sum of an continuous array"""
-    largest = 0
-    old_largest = 0
-    skip = -1
-    for i, x in enumerate(l):
-        if skip == i:
-            continue
-        elif x > 0:
-            largest += x
-        elif sum(l[i:i+2]) > 0:
-            largest += sum(l[i:i+2])
-            # Skip the value in 2 iterations as it's already counted
-            skip = i + 1
-        else:
-            old_largest = max(largest, old_largest)
-            largest = 0
+def max_sum_improved(l: list) -> int:
+    """Kadane’s Algorithm, in neat python"""
+    max_ending_here, max_so_far = 0, 0
 
-    return max(largest, old_largest)
+    for x in l:
+        max_ending_here += x
+        max_ending_here = max(0, max_ending_here)
+        max_so_far = max(max_so_far, max_ending_here)
+
+    return max_so_far
 
 
 if __name__ == '__main__':
-    print(max_sum([34, -50, 42, 14, -5, 86, 10, 10, -5, 10, 5, -5, 15]))
-    print(max_sum([34, -50, 42, 14, -5, 86]))
-    print(max_sum([34, -50, 42, 14, -5, 86, -5, -5, 20]))
+    print(max_sum_improved([34, -50, 42, 14, -5, 86, 10, 10, -5, 10, 5, -5, 15]))
+    assert max_sum_improved([34, -50, 42, 14, -5, 86]) == 137
+    print(max_sum_improved([34, -50, 42, 14, -5, 86, -5, -5, 5, -5, -5, 100]))
