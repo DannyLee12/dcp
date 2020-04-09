@@ -8,7 +8,7 @@ It should run in O(N) time.
 Hint: Make sure each one of the 52! permutations of the deck is equally likely.
 """
 
-from random import randrange
+from random import randint
 from itertools import permutations
 
 
@@ -16,7 +16,7 @@ def shuffle(l: list) -> list:
     """Return a shuffled list - all permutations should be equally likely"""
     n = len(l)
     for i in range(n):
-        s = randrange(0, i+1)
+        s = randint(i, n - 1)
         l[s], l[i] = l[i], l[s]
 
     return l
