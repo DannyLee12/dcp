@@ -16,6 +16,7 @@ def find_index(l: list, k: int) -> int:
     def bin_search(value, list):
         start = 0
         end = len(list) - 1
+        searched = False
         while True:
             midpoint = int((start + end) / 2)
             if list[midpoint] == value:
@@ -25,23 +26,28 @@ def find_index(l: list, k: int) -> int:
             elif value > list[midpoint]:
                 start = midpoint + 1
             # Solve if we need to start from the end of the list
-            if start >= end:
+            # i.e. we have reached the beginning of the list
+            if start > end:
+                if searched:
+                    return None
                 if start == 0:
                     end = len(list) - 1
                     start = int((start + end) / 2)
+                    searched = True
+                if value > list[end]:
+                    return None
+
 
     return bin_search(k, l)
 
 
 if __name__ == '__main__':
-    print(find_index([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], 2))
-
     for x in range(13):
-        print(x)
         assert find_index([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], x) == x
     assert find_index([13, 18, 25, 2, 8, 10], 8) == 4
-
     l = [13, 18, 25, 2, 8, 10]
     for i, x in enumerate(l):
         assert find_index(l, x) == i
 
+    assert find_index(l, 123) is None
+    assert find_index(l, 0) is None
