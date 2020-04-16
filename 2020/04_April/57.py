@@ -42,3 +42,4 @@ def list_to_len(s: str, k: int) -> list:
 if __name__ == '__main__':
     print(list_to_len("the quick brown fox jumps over the lazy dog", 10))
     print(list_to_len("the 1234567890 brown fox jumps over the lazy dog", 10))
+    print(list_to_len("too_long", 5))
