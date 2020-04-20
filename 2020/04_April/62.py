@@ -39,7 +39,26 @@ def ways(n: int) -> int:
     return grid[-1][-1]
 
 
+def ways_improved(n: int) -> int:
+    """Return the number of ways to the bottom right - improved"""
+    oldrow = [1] * n
+    row = 1
+    while row < n:
+        for i in range(n):
+            if i == 0:
+                newrow = [1]
+            else:
+                newrow.append(newrow[i-1] + oldrow[i])
+        oldrow = newrow
+        row += 1
+
+    return newrow[-1]
+
+
 if __name__ == '__main__':
     assert ways(2) == 2
     assert ways(5) == 70
     print(ways(4))  # 20 Checked on paper
+
+    assert ways_improved(5) == 70
+    print(ways_improved(4))  # 20
