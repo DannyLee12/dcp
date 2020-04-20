@@ -26,3 +26,4 @@ def power(x, y):
 
 if __name__ == '__main__':
     print(power(7, 30))
+    assert power(7, 12) == pow(7, 12)
