@@ -26,9 +26,5 @@ def perfect_number(n: int) -> int:
             return i
 
 
-def perfect_number_2(n: int) -> int:
-    return (10 * n) + (10 * ((n // 10) + 1)) - n - (n // 10)
-
-
 if __name__ == '__main__':
     assert perfect_number(2) == 28
