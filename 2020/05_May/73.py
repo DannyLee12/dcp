@@ -8,7 +8,7 @@ class LinkedList:
         self.data = data
         self.next = next
 
-    def __repr__(self, next=None):
+    def __repr__(self):
         return self._rep(self)
 
     def _rep(self, node, val=""):
