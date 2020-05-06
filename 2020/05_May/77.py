@@ -35,9 +35,6 @@ def new_ints(l: list) -> list:
     return result
 
 
-
-
-
 if __name__ == '__main__':
-    # print(new_intervals([(1, 3), (5, 8), (4, 10), (20, 25)]))
+    print(new_intervals([(1, 3), (5, 8), (4, 10), (20, 25)]))
     print(new_ints([(1, 3), (5, 8), (4, 10), (20, 25)]))
