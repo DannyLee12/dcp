@@ -12,7 +12,6 @@ one element to get a non-decreasing array.
 
 def non_dec(l: list) -> bool:
     """Return True if we can make the array non-decreasing"""
-    l2 = l[:]
     n = len(l) - 1
     count = 0
     for i in range(n):
