@@ -16,20 +16,24 @@ class Tree:
             return True
         return False
 
-    # def __repr__(self):
-    #     return self._rep(self)
-    #
-    # def _rep(self, tree, val=""):
-    #     #TODO Fix this
-    #     val += f"  {tree.node}\n / \\\n{tree.left}   {tree.right}"
-    #     if isinstance(tree.left, str) and isinstance(tree.right, str):
-    #         return val
-    #     if isinstance(tree.left, Tree):
-    #         return val + self._rep(tree.left)
-    #     elif isinstance(tree.right, Tree):
-    #         return val + self._rep(tree.right)
-    #
-    #     return self._rep(tree.left) + self._rep(tree.right)
+    def __repr__(self):
+        return self._rep(self)
+
+    def _rep(self, tree, val=""):
+        val = '\n' + tree.node + '\n'
+        if isinstance(tree.left, str):
+            val = tree.left + val
+        elif isinstance(tree.right, str):
+            val = val + tree.right
+
+        if isinstance(tree.left, Tree) and isinstance(tree.right, Tree):
+            return self._rep(tree.left) + val + self._rep(tree.right)
+        elif isinstance(tree.left, Tree):
+            return self._rep(tree.left) + val
+        elif isinstance(tree.right, Tree):
+            return val + self._rep(tree.right)
+
+        return f"{tree.left} <- {tree.node} -> {tree.right}"
 
 
 class LinkedList:
@@ -45,3 +49,13 @@ class LinkedList:
             return val + str(node.data)
         val += str(node.data) + " -> "
         return self._rep(node.next, val=val)
+
+
+if __name__ == '__main__':
+    t = Tree("a", Tree("b", "c", "d"), Tree("e", Tree("b", Tree("b", Tree("b", "c", "d"), "d"), "d"), "g"))
+    print(t)
+    print("\n\n")
+    t2 = Tree("a", Tree("b", "c", "d"), "e")
+    print(t2)
+
+
