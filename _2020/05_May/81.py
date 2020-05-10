@@ -8,19 +8,21 @@ should return [“ad”, “ae”, “af”, “bd”, “be”, “bf”, “cd
 """
 
 
-def mapping(map: dict, num: int) -> list:
-    """Return all valid numbers"""
-    l = []
-    s = str(num)
-    n = len(s)
-    for x in range(n):
-        for y in range(x+1, n):
-            l += [i + j for i in map[s[x]] for j in map[s[y]]]
+def get_permutations(mapping, digits):
 
-    return l
+    digit = digits[0]
+
+    if len(digits) == 1:
+        return mapping[digit]
+
+    result = []
+    for char in mapping[digit]:
+        for perm in get_permutations(mapping, digits[1:]):
+            result.append(char + perm)
+    return result
 
 
 if __name__ == '__main__':
-    print(mapping({"2": ["a", "b", "c"], "3": ["d", "e", "f"]}, 23))
-    print(mapping({"2": ["a", "b", "c"], "3": ["d", "e", "f"], "4": ["g"]}, 234))
-    assert mapping({"2": ["a", "b", "c"], "3": ["d", "e", "f"]}, 23) == ['ad', 'ae', 'af', 'bd', 'be', 'bf', 'cd', 'ce', 'cf']
+    print(get_permutations({"2": ["a", "b", "c"], "3": ["d", "e", "f"]}, "23"))
+    print(get_permutations({"2": ["a", "b", "c"], "3": ["d", "e", "f"], "4": ["g"]}, "234"))
+    assert get_permutations({"2": ["a", "b", "c"], "3": ["d", "e", "f"]}, "23") == ['ad', 'ae', 'af', 'bd', 'be', 'bf', 'cd', 'ce', 'cf']
