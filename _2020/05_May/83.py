@@ -26,7 +26,10 @@ def invert(t: Tree) -> Tree:
     """Invert a binary Tree"""
     if isinstance(t.left, Tree) and isinstance(t.right, Tree):
         t.right, t.left = invert(t.left), invert(t.right)
-        return t
+    elif isinstance(t.left, Tree):
+        t.right, t.left = invert(t.left), t.right
+    elif isinstance(t.right, Tree):
+        t.right, t.left = t.left, invert(t.right)
     else:
         t.left, t.right = t.right, t.left
 
