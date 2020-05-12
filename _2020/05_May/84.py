@@ -53,3 +53,9 @@ if __name__ == '__main__':
 1 1 0 0 1
 1 1 0 0 1""".split("\n")]
     assert count_islands(l) == 4
+
+    l2 = """1 0 0 1
+    0 0 0 0
+    0 1 1 0
+    0 0 1 0"""
+    assert count_islands([x.split() for x in l2.split("\n")]) == 3
