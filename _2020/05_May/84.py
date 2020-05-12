@@ -16,7 +16,7 @@ For example, this matrix has 4 islands.
 
 
 def check_land(l: list, x: int, y: int, visited: list) -> (int, int):
-    """Return the position of any land that hasn't been visited or None"""
+    """Recursively visit all blocks of land in the vicinity"""
     for a in range(-1, 2):
         for b in range(-1, 2):
             if a == b == 0:
