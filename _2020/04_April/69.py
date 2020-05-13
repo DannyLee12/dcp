@@ -12,6 +12,8 @@ You can assume the list has at least three integers.
 def largest_product(l: list) -> int:
     """Return the largest product of three integers"""
     l.sort()
+    # Note there is an O(N) way of getting these max and min
+    # values, but it is tedious. sorting in O(NlogN)
     return max((l[0] * l[1] * l[-1]), (l[-3] * l[-2] * l[-1]))
 
 
