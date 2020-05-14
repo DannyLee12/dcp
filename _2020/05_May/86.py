@@ -10,6 +10,14 @@ For example, given the string "()())()", you should return 1. Given the string
 
 def pop_parentheses(s: str) -> int:
     """How many parentheses should be removed to balance the string"""
+
+    if not s:
+        return 0
+    elif s[0] == ")":
+        return 1 + pop_parentheses(s[1:])
+    elif s[-1] == "(":
+        return 1 + pop_parentheses(s[:-1])
+
     count = 0
     for c in s:
         if c == "(":
@@ -21,9 +29,12 @@ def pop_parentheses(s: str) -> int:
 
 
 if __name__ == '__main__':
+    # Question's tests
     assert pop_parentheses("()())()") == 1
+    assert pop_parentheses(")(") == 2
+    # Own tests
     assert pop_parentheses("(()") == 1
     assert pop_parentheses("((()") == 2
     assert pop_parentheses("(()))") == 1
     assert pop_parentheses("()))))") == 4
-
+    assert pop_parentheses("))()((") == 4
