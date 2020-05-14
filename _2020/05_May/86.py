@@ -9,19 +9,15 @@ For example, given the string "()())()", you should return 1. Given the string
 
 
 def pop_parentheses(s: str) -> int:
-    """How many parethesis should be removed to balance the string"""
-    l = []
+    """How many parentheses should be removed to balance the string"""
     count = 0
     for c in s:
         if c == "(":
-            l.append("x")
+            count += 1
         elif c == ")":
-            try:
-                l.pop()
-            except IndexError:
-                count += 1
+            count -= 1
 
-    return len(l) + count
+    return abs(count)
 
 
 if __name__ == '__main__':
