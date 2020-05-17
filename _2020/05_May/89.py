@@ -13,34 +13,34 @@ def valid_tree(t: Tree, flag: str = None) -> bool:
     """
     Return whether a binary search tree is valid
     """
-    valid = False
     if isinstance(t.left, Tree):
         t.left = valid_tree(t.left, 'l')
     if isinstance(t.right, Tree):
         t.right = valid_tree(t.right, 'r')
-    else:
-        if t.left and t.right:
-            if t.left <= t.node <= t.right:
-                if t.root:
-                    return True
-                elif flag == 'l':
-                    return t.right
-                elif flag == 'r':
-                    return t.left
-                else:
-                    return t.node
-        elif t.left:
-            if t.left <= t.node:
-                if t.root:
-                    return True
-                else:
-                    return t.node
-        elif t.right:
-            if t.node <= t.right:
-                if t.root:
-                    return True
-                else:
-                    return t.node
+    if t.left and t.right:
+        if t.left <= t.node <= t.right:
+            if t.root:
+                return True
+            elif flag == 'l':
+                # On the left side of the Binary Tree, we are concerned with
+                # the larger value (t.right) assuming that tree is valid
+                return t.right
+            elif flag == 'r':
+                return t.left
+            else:
+                return t.node
+    elif t.left:
+        if t.left <= t.node:
+            if t.root:
+                return True
+            else:
+                return t.node
+    elif t.right:
+        if t.node <= t.right:
+            if t.root:
+                return True
+            else:
+                return t.node
 
     return t.left <= t.node <= t.right
 
