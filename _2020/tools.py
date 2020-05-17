@@ -20,7 +20,7 @@ class Tree:
         return self._rep(self)
 
     def _rep(self, tree, val=""):
-        val = '\n' + tree.node + '\n'
+        val = '\n' + str(tree.node) + '\n'
         if isinstance(tree.left, str):
             val = tree.left + val
         elif isinstance(tree.right, str):
