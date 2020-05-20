@@ -11,21 +11,20 @@ For example, given {'CSC300': ['CSC100', 'CSC200'], 'CSC200': ['CSC100'],
 
 courses = {'CSC300': ['CSC100', 'CSC200'], 'CSC200': ['CSC100'],
           'CSC100': []}
+courses_invalid = {'CSC300': ['CSC100', 'CSC200'], 'CSC200': ['CSC200'],
+                   'CSC100': []}
 
 
 def ordering(courses, items=None):
     while courses:
         if not items:
             items = []
-            for course, prereq in courses.items():
-                # Append all courses without prerequisites
-                if not prereq:
-                    items.append(course)
-            for c in items:
-                del courses[c]
-
-        else:
-            for course, prereq in courses.items():
+        dels = []
+        for course, prereq in courses.items():
+            if not prereq:
+                items.append(course)
+                dels.append(course)
+            else:
                 for c in prereq:
                     valid = True
                     if not c in items:
@@ -33,14 +32,16 @@ def ordering(courses, items=None):
                         break
                 if valid:
                     items.append(course)
-            for c2 in items:
-                try:
-                    del courses[c2]
-                except KeyError:
-                    pass
+                    dels.append(course)
+        if not dels:
+            return None
+
+        for d in dels:
+            del courses[d]
 
     return items
 
 
 if __name__ == '__main__':
     assert ordering(courses) == ['CSC100', 'CSC200', 'CSC300']
+    assert ordering(courses_invalid) is None
