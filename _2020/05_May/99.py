@@ -11,24 +11,24 @@ Your algorithm should run in O(n) complexity.
 """
 
 
-def in_set(i: int, s: set, total: int = 0) -> int:
+def in_set(i: int, s: set, total: int = 0, visited=None) -> int:
     """Recursively add items in the set"""
-    if not i in s:
-        return 0
-    if i in s:
-        s -= {i}
-        return total + 1 + in_set(i+1, s) + in_set(i-1, s)
+    if not visited:
+        visited = []
+    if i not in visited:
+        if i in s:
+            visited.append(i)
+            return total + 1 + in_set(i + 1, s, visited=visited) + \
+                               in_set(i - 1, s, visited=visited)
+    return 0
 
 
 if __name__ == '__main__':
-    test_set = {1, 3, 4, 5}
-    assert in_set(4, test_set) == 3
-    assert in_set(1, test_set) == 1
     l = [100, 4, 200, 1, 3, 2]
-    s = set(l)
+    s = set()
     max_so_far = 0
     for i in l:
+        s.add(i)
         max_so_far = max(max_so_far, in_set(i, s))
 
     print(max_so_far)
-
