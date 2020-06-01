@@ -14,6 +14,7 @@ def shortest_substring(s: str, vals: set) -> str:
     """Return the shortest substring containing all s"""
     n = len(s)
     d = defaultdict(int)
+    shortest = (0, n)
     for i, c in enumerate(s):
         s2 = vals.copy()
         for x in range(i, n):
@@ -22,10 +23,12 @@ def shortest_substring(s: str, vals: set) -> str:
             d[i] += 1
         if s2:
             del d[i]
+            break
 
-    result = min(d.items(), key=lambda x: x[1])
+        if d[i] < shortest[1]:
+            shortest = i, d[i]
 
-    return s[result[0]:result[0] + result[1]]
+    return s[shortest[0]: shortest[0] + shortest[1]]
 
 
 if __name__ == '__main__':
