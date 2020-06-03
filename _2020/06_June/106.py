@@ -20,6 +20,24 @@ def hoppable(l: list) -> bool:
     return False
 
 
+def hoppable_refuel(l: list) -> bool:
+    """Assuming a refuel, can we hop to the end of the list"""
+    n = len(l)
+    hops = 0
+    for i, x in enumerate(l):
+        if x > 0:
+            hops -= 1
+        hops += x
+        if x == n - 1:
+            return True
+        if hops == 0:
+            return False
+
+    return True
+
+
 if __name__ == '__main__':
     assert hoppable([2, 0, 1, 0])
     assert hoppable([1, 1, 0, 1]) is False
+    assert hoppable_refuel([2, 0, 1, 0])
+    assert hoppable_refuel([1, 1, 0, 1]) is False
