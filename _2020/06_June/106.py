@@ -36,8 +36,24 @@ def hoppable_refuel(l: list) -> bool:
     return True
 
 
+def hoppable_reverse(l: list) -> bool:
+    """Consider working from the end of the list"""
+    # For [i, j, k, x], i >= 3, j >= 2, k >= 1, then
+    # Recursively check the next block, using backtracking
+    n = len(l)
+    if n == 1:
+        return True
+    for i, x in enumerate(reversed(l[:-1])):
+        if x == 1 + i:
+            if hoppable_reverse(l[:n - i - 1]):
+                return True
+    return False
+
+
 if __name__ == '__main__':
     assert hoppable([2, 0, 1, 0])
     assert hoppable([1, 1, 0, 1]) is False
     assert hoppable_refuel([2, 0, 1, 0])
     assert hoppable_refuel([1, 1, 0, 1]) is False
+    assert hoppable_reverse([2, 0, 1, 0])
+    assert hoppable_reverse([1, 1, 0, 1]) is False
