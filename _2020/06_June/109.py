@@ -9,12 +9,8 @@ Bonus: Can you do this in one line?
 
 
 def swap_bits(i: int) -> int:
-    """Swap Even and Odd bits"""
-    l = [x for i, x in enumerate(bin(i)) if i > 1]
-    for x in range(0, len(l), 2):
-        l[x], l[x+1] = l[x+1], l[x]
-
-    return int("".join(l), 2)
+    """Swap bits in one line"""
+    return (i & 170) >> 1 | (i & 85) << 1
 
 
 if __name__ == '__main__':
