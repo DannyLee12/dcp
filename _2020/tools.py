@@ -9,11 +9,14 @@ class Tree:
         self.root = root
 
     def __eq__(self, other):
-        if all([self.node == other.node,
-                self.left == other.left,
-                self.right == other.right,
-                self.root == other.root]):
-            return True
+        try:
+            if all([self.node == other.node,
+                    self.left == other.left,
+                    self.right == other.right,
+                    self.root == other.root]):
+                return True
+        except AttributeError:
+            return False
         return False
 
     def __repr__(self):
