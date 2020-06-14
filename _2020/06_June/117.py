@@ -10,16 +10,16 @@ from _2020 import Tree
 def min_layer(t: Tree) -> int:
     """Determine which layer of a tree has the smallest sum"""
     queue = [t]
-    totals = {1: t.node}
     layer = 1
-    while True:
+    min_val, min_layer = t.node, layer
+    nq = True
+    while nq:
         nq = []
         total = 0
-        layer += 1
         while queue:
             node = queue.pop()
             if isinstance(node, int):
-                continue
+                continue  # Already been counted
             if isinstance(node.left, Tree):
                 nq.append(node.left)
                 total += node.left.node
@@ -32,13 +32,12 @@ def min_layer(t: Tree) -> int:
             else:
                 if node.right:
                     total += node.right
-        totals[layer] = total
         layer += 1
         queue = nq
-        if not queue:
-            break
+        if total < min_val:
+            min_layer, min_val = layer, total
 
-    return min(totals.items(), key=lambda x: x[1])[1]
+    return min_layer
 
 
 if __name__ == '__main__':
@@ -47,4 +46,4 @@ if __name__ == '__main__':
     t2 = Tree(1,
               Tree(2, 4, Tree(5, -1),
               Tree(3, right=Tree(6, right=1))))
-    assert min_layer(t2) == 0
+    assert min_layer(t2) == 4
