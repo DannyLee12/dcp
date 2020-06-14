@@ -6,24 +6,28 @@ That is, generate() should return a tree whose size is unbounded but finite.
 
 from random import random, randint
 
-from _2020 import Tree
 
+class Tree:
+    def __init__(self, node):
+        self.node = node
 
-def generate() -> Tree:
-    """Generate a generator of a Tree of arbitary size"""
-    t = Tree(randint(0, 10))
-    ran = random()
-    while ran < 0.9:
-        t.right = Tree(randint(0, 10))
-        t.left = Tree(randint(0, 10))
-        yield t
-        if random() > 0.5:
-            t = t.left
-        else:
-            t = t.right
-        ran = random()
+    @property
+    def left(self):
+        if random() > 0.09:
+            return Tree(randint(0, 10))
+        return randint(0, 10)
+
+    @property
+    def right(self):
+        if random() > 0.09:
+            return Tree(randint(0, 10))
+        return randint(0, 10)
 
 
 if __name__ == '__main__':
-    for i in generate():
-        print(i.left)
+    t = Tree(1)
+    while True:
+        t = t.left
+        print(t)
+        if isinstance(t, int):
+            break
