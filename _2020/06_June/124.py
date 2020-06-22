@@ -7,6 +7,7 @@ Write a function that, given n, returns the number of rounds you'd expect to
 play until one coin remains.
 """
 from random import random
+from math import log
 
 
 def flip_coins(n: int, count: int = 0) -> int:
@@ -21,7 +22,14 @@ def flip_coins(n: int, count: int = 0) -> int:
     return flip_coins(heads, count + 1)
 
 
+def coins(n):
+    return log(n, 2)
+
+
 if __name__ == '__main__':
     print(flip_coins(100))
     print(flip_coins(10))
     print(flip_coins(1))
+    print(coins(100))
+    print(coins(10))
+    print(coins(1))
