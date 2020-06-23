@@ -25,6 +25,15 @@ def swaps(l:list, k: int) -> list:
     return l
 
 
+def pop_append(l: list, k: int) -> list:
+    """Pop and append"""
+    for _ in range(k):
+        l.append(l.pop(0))
+
+    return l
+
+
 if __name__ == '__main__':
     print(rotate([1, 2, 3, 4, 5, 6], 2))
     print(swaps([1, 2, 3, 4, 5, 6], 2))
+    print(pop_append([1, 2, 3, 4, 5, 6], 2))
