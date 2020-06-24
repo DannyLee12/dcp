@@ -29,32 +29,28 @@ return 124 (99 + 25) as:
 from _2020 import LinkedList
 
 
-def sum_ll_slow(ll1: LinkedList, ll2: LinkedList) -> LinkedList:
-    """Slow simple solution"""
-    num1 = str(ll1.data)
-    while ll1.next:
-        num1 += str(ll1.next)
+def sum_ll(ll1: LinkedList, ll2: LinkedList) -> LinkedList:
+    """Sum two linked lists in line"""
+    ll3 = LinkedList(None)
+    ll = ll3
+    while ll1 and ll2:
+        if not ll.data:
+            ll.data = (ll1.data + ll2.data) % 10
+            remainder = (ll1.data + ll2.data) // 10
+        else:
+            ll.next = LinkedList((ll1.data + ll2.data) % 10 + remainder)
+            remainder = (ll1.data + ll2.data) // 10
+            ll = ll.next
         ll1 = ll1.next
-
-    num2 = str(ll2.data)
-    while ll2.next:
-        num2 += str(ll2.next)
         ll2 = ll2.next
 
-    print(num1[::-1])
-    print(num2[::-1])
+    if remainder:
+        ll.next = LinkedList(remainder)
 
-    num3 = str(int(num1[::-1]) + int(num2[::-1]))
-    ll3 = LinkedList(num3[-1])
-    ll = ll3
-    for i, c in enumerate(reversed(str(num3))):
-        if i == 0:
-            continue
-        ll.next = LinkedList(c)
-        ll = ll.next
-
-    print(ll3)
+    return ll3
 
 
 if __name__ == '__main__':
-    sum_ll_slow(LinkedList(9, LinkedList(9)), LinkedList(5, LinkedList(2)))
+    l = LinkedList(4, (LinkedList(2, LinkedList(1))))
+    l2 = sum_ll(LinkedList(9, LinkedList(9)), LinkedList(5, LinkedList(2)))
+    assert l == l2

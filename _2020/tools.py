@@ -84,6 +84,13 @@ class LinkedList:
     def __repr__(self):
         return self._rep(self)
 
+    def __eq__(self, other):
+        if type(self) != type(other):
+            return False
+        if isinstance(self, LinkedList) and isinstance(other, LinkedList):
+            return self.data == other.data and self.next == other.next
+        return self == other
+
     def _rep(self, node, val=""):
         if node.next is None:
             return val + str(node.data)
