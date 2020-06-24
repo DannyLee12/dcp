@@ -33,7 +33,9 @@ def sum_ll(ll1: LinkedList, ll2: LinkedList) -> LinkedList:
     """Sum two linked lists in line"""
     ll3 = LinkedList(None)
     ll = ll3
-    while ll1 and ll2:
+    count = 0
+    while count < 2:
+        count = 0
         if not ll.data:
             ll.data = (ll1.data + ll2.data) % 10
             remainder = (ll1.data + ll2.data) // 10
@@ -41,8 +43,15 @@ def sum_ll(ll1: LinkedList, ll2: LinkedList) -> LinkedList:
             ll.next = LinkedList((ll1.data + ll2.data) % 10 + remainder)
             remainder = (ll1.data + ll2.data) // 10
             ll = ll.next
+
         ll1 = ll1.next
+        if ll1 is None:
+            count += 1
+            ll1 = LinkedList(0)
         ll2 = ll2.next
+        if ll2 is None:
+            count += 1
+            ll2 = LinkedList(0)
 
     if remainder:
         ll.next = LinkedList(remainder)
@@ -54,3 +63,6 @@ if __name__ == '__main__':
     l = LinkedList(4, (LinkedList(2, LinkedList(1))))
     l2 = sum_ll(LinkedList(9, LinkedList(9)), LinkedList(5, LinkedList(2)))
     assert l == l2
+    l3 = LinkedList(4, LinkedList(2, LinkedList(1)))
+    l4 = sum_ll(LinkedList(4, LinkedList(1, LinkedList(1))), LinkedList(0, LinkedList(1)))
+    assert l3 == l4
