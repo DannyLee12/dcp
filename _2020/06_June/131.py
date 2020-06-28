@@ -21,10 +21,10 @@ class HitCounter:
         return len(self.hits)
 
     def range(self, lower, upper):
-        l = []
+        l = 0
         for x in self.hits:
             if lower <= x <= upper:
-                l.append(x)
+                l += 1
         return l
 
 
@@ -36,4 +36,4 @@ if __name__ == '__main__':
     hc.record(4)
     hc.record(5)
     assert hc.total() == 5
-    assert hc.range(2, 4) == [2, 3, 4]
+    assert hc.range(2, 4) == len([2, 3, 4])
