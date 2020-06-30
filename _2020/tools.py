@@ -2,11 +2,12 @@
 
 
 class Tree:
-    def __init__(self, node, left=None, right=None, root=False):
+    def __init__(self, node, left=None, right=None, root=False, parent=None):
         self.node = node
         self.left = left
         self.right = right
         self.root = root
+        self.parent = parent
 
     def __eq__(self, other):
         try:

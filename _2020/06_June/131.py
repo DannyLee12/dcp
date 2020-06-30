@@ -27,7 +27,6 @@ def clone(head: LinkedListRandom) -> LinkedListRandom:
     return ll
 
 
-
 if __name__ == '__main__':
     l2 = LinkedListRandom(2)
     l1 = LinkedListRandom(1, l2, l2)
