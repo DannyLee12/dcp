@@ -24,7 +24,10 @@ class SparseArray:
         self.d[i] = val
 
     def get(self, i):
-        return self.d[i]
+        try:
+            return self.d[i]
+        except KeyError:
+            return 0
 
 
 if __name__ == '__main__':
@@ -41,3 +44,4 @@ if __name__ == '__main__':
     sa.set(12000, -1)
     assert sa.get(20) == -1
     assert sa.get(12000) == -1
+    assert sa.get(1000000) == 0
