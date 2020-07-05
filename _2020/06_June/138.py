@@ -9,15 +9,12 @@ and a 1¢.
 
 
 def greedy(n: int) -> int:
-    """Return the min number of coins required to make n cents"""
+    """Greedy method using division and modulo"""
     coins = [25, 10, 5, 1]
-    index = 0
     total_coins = 0
-    while n:
-        while coins[index] <= n:
-            n -= coins[index]
-            total_coins += 1
-        index += 1
+    for coin in coins:
+        total_coins += n // coin
+        n = n % coin
 
     return total_coins
 
