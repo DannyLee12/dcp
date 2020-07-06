@@ -19,29 +19,46 @@ class PeekableInterface(object):
         pass
 
 """
-from itertools import tee
 
 
 class PeekableInterface(object):
     def __init__(self, iterator):
         self.i = iterator
+        self.prev = []
 
     def peek(self):
-        self.i, cp = tee(self.i)
-        print(next(cp))
+        if self.prev:  # If there is already a value in this queue, return it
+            print(self.prev[0])
+        else:
+            val = next(self.i)
+            self.prev.append(val)
+            print(val)
 
     def next(self):
+        if self.prev:
+            return self.prev.pop()
         return next(self.i)
 
     def hasNext(self):
-        self.i, cp = tee(self.i)
-        return next(cp) is not None
+        if self.prev:
+            return True
+        else:
+            try:
+                val = next(self.i)
+                self.prev.append(val)
+                return True
+            except StopIteration:
+                return False
 
 
 if __name__ == '__main__':
     i = iter([0, 1, 2, 3])
     pi = PeekableInterface(i)
     pi.peek()  # Prints 0
+    pi.peek()
     assert pi.hasNext()
     assert pi.next() == 0
     assert pi.next() == 1
+    assert pi.next() == 2
+    assert pi.next() == 3
+    assert pi.hasNext() is False
