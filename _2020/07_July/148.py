@@ -11,8 +11,8 @@ For example, for n = 2, one gray code would be [00, 01, 11, 10].
 
 def gray(n: int) -> list:
     """Return gray codes"""
-    if n == 2:
-        return [[0, 0], [1, 0], [1, 1], [0, 1]]
+    if n == 1:
+        return [[0], [1]]
     else:
         return [[0] + x for x in gray(n-1)] + [[1] + x for x in reversed(gray(n-1))]
 
