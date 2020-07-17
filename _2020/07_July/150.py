@@ -12,11 +12,18 @@ def closest_points(l: list, cp: tuple, k: int) -> list:
     """Return the k closest points in l to cp"""
     def distance(p1, p2):
         return sqrt(((p1[0] - p2[0]) ** 2) + (p1[1] - p2[1]) ** 2)
-    d = {}
+    close_points = {}
+    largest_distance = float("inf")
     for point in l:
-        d[point] = distance(point, cp)
+        dis = distance(point, cp)
+        if dis < largest_distance:
+            if len(close_points) == k:
+                # find the largest distance and del it
+                del close_points[sorted(close_points.items(), key=lambda x: x[1])[-1][0]]
+                largest_distance = dis
+            close_points[point] = dis
 
-    return sorted(d, key=lambda x: x[1])[:k]
+    return list(close_points.keys())
 
 
 if __name__ == '__main__':
