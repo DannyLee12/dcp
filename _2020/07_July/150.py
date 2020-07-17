@@ -19,7 +19,7 @@ def closest_points(l: list, cp: tuple, k: int) -> list:
         if dis < largest_distance:
             if len(close_points) == k:
                 # find the largest distance and del it
-                del close_points[sorted(close_points.items(), key=lambda x: x[1])[-1][0]]
+                del close_points[max(close_points.items(), key=lambda x: x[1])[0]]
                 largest_distance = dis
             close_points[point] = dis
 
