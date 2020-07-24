@@ -28,3 +28,4 @@ def get_integers(n: int) -> int:
 if __name__ == '__main__':
     assert get_integers(13) == 2
     assert get_integers(27) == 3
+    print(get_integers(1423876482376))
