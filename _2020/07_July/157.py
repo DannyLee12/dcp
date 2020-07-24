@@ -5,22 +5,18 @@ For example, carrace should return true, since it can be rearranged to form
 racecar, which is a palindrome. daily should return false, since there's no
 rearrangement that can form a palindrome.
 """
-from collections import defaultdict
 
 
 def permutation_palindrome(s: str) -> bool:
     """Return true if any permutation of s is a palindrome"""
-    d = defaultdict(int)
+    vals = set()
     for c in s:
-        d[c] += 1
+        if c in vals:
+            vals -= {c}
+        else:
+            vals.add(c)
 
-    odds = 0
-    for v in d.values():
-        if v % 2 == 1:  # Odd number
-            odds += 1
-            if odds > 1:
-                return False
-    return True
+    return len(vals) < 2
 
 
 if __name__ == '__main__':
