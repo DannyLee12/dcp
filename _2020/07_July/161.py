@@ -25,11 +25,9 @@ Return the list:
 
 def shortest_prefix(l: list) -> list:
     """Return the shortest prefix of a list of words"""
-    cache = {}
     n = len(l)
-    words = []
-    max_x = 0
-    for i in range(n):
+    i = 0
+    while i < n:
         x, max_x = 0, 0
         for j in range(n):
             if i == j:
@@ -37,9 +35,10 @@ def shortest_prefix(l: list) -> list:
             while l[i][x] == l[j][x]:
                 x += 1
                 max_x = max(max_x, x)
-        words.append(l[i][:max_x + 1])
+        l[i] = l[i][:max_x + 1]
+        i += 1
 
-    return words
+    return l
 
 
 if __name__ == '__main__':
