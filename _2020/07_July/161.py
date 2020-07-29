@@ -25,11 +25,19 @@ Return the list:
 
 def shortest_prefix(l: list) -> list:
     """Return the shortest prefix of a list of words"""
+    cache = set()
     n = len(l)
     i = 0
     while i < n:
+        if i != 0:
+            if l[i][0] not in cache:
+                l[i] = l[i][0]
+                i += 1
+                continue
         x, max_x = 0, 0
         for j in range(n):
+            if i == 0:
+                cache.add(l[j][0])
             if i == j:
                 continue
             while l[i][x] == l[j][x]:
