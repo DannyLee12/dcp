@@ -81,6 +81,7 @@ class LinkedList:
     def __init__(self, data, next=None):
         self.data = data
         self.next = next
+        self.total = 0
 
     def __repr__(self):
         return self._rep(self)
@@ -98,12 +99,12 @@ class LinkedList:
         val += str(node.data) + " -> "
         return self._rep(node.next, val=val)
 
-
-if __name__ == '__main__':
-    t = Tree("a", Tree("b", "c", "d"), Tree("e", Tree("b", Tree("b", Tree("b", "c", "d"), "d"), "d"), "g"))
-    print(t)
-    print("\n\n")
-    t2 = Tree("a", Tree("b", "c", "d"), "e")
-    print(t2)
-
-
+    def __len__(self):
+        if self.total:
+            return self.total
+        c = self
+        while isinstance(c.next, LinkedList):
+            self.total += 1
+            c.next = c.next.next
+        self.total += 1
+        return self.total
