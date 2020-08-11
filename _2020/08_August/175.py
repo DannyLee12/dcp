@@ -25,19 +25,18 @@ import random
 from collections import defaultdict
 
 
-def count_states(states: list, num_steps: int, start_state: str) -> dict:
+def count_states(states: dict, num_steps: int, start_state: str) -> dict:
     """Given transition properties, return the number of times in each state"""
     d = defaultdict(int)
     while num_steps > 0:
         r = random.random()
         base_random = 0  # Random number offset. 0.8, 0.15 -> 0.8, 0.95
-        for x, y, z in states:
-            if x == start_state:
-                if base_random <= r < z + base_random:
-                    d[y] += 1
-                    start_state = y
-                    num_steps -= 1
-                base_random += z
+        for k, v in states[start_state].items():
+            if base_random <= r < v + base_random:
+                d[k] += 1
+                start_state = k
+                num_steps -= 1
+            base_random += v
 
     return d
 
@@ -54,5 +53,12 @@ if __name__ == '__main__':
   ('c', 'b', 0.25),
   ('c', 'c', 0.5)
 ]
-    print(count_states(states, 5000, "a"))
+
+    d = {}
+    for a, b, p in states:
+        if a not in d:
+            d[a] = {}
+        d[a][b] = p
+
+    print(count_states(d, 5000, "a"))
     # defaultdict(<class 'int'>, {'a': 3174, 'b': 1563, 'c': 263})
