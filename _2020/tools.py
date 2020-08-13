@@ -77,7 +77,7 @@ def valid_tree(t: Tree, flag: str=None, calls=0) -> (bool, int):
     return t.left <= t.node <= t.right, calls
 
 
-class LinkedList:
+class OldLinkedList:
     def __init__(self, data, next=None):
         self.data = data
         self.next = next
@@ -89,7 +89,7 @@ class LinkedList:
     def __eq__(self, other):
         if type(self) != type(other):
             return False
-        if isinstance(self, LinkedList) and isinstance(other, LinkedList):
+        if isinstance(self, OldLinkedList) and isinstance(other, OldLinkedList):
             return self.data == other.data and self.next == other.next
         return self == other
 
@@ -103,8 +103,51 @@ class LinkedList:
         if self.total:
             return self.total
         c = self
-        while isinstance(c.next, LinkedList):
+        while isinstance(c.next, OldLinkedList):
             self.total += 1
             c.next = c.next.next
         self.total += 1
         return self.total
+
+
+class Node:
+    # Constructor to initialize the node object
+    def __init__(self, data):
+        self.data = data
+        self.next = None
+
+    def __repr__(self):
+        return str(self.data) + "->" + str(self.next)
+
+
+class LinkedList:
+    # Function to initialize head
+    def __init__(self):
+        self.head = None
+        self.len = 0
+
+    # Function to insert a new node at the beginning
+    def push(self, new_data):
+        # allocate node and put the data
+        new_node = Node(new_data)
+
+        # Make next of new node as head
+        new_node.next = self.head
+
+        # move the head to point to the new Node
+        self.head = new_node
+
+    def __repr__(self, s=""):
+        temp = self.head
+        while temp:
+            s += str(temp.data) + " -> "
+            temp = temp.next
+        return s.rstrip(" -> ")
+
+    def __len__(self):
+        if not self.len:
+            c = self.head
+            while c.next:
+                self.len += 1
+                c = c.next
+        return self.len + 1
