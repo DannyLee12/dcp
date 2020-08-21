@@ -5,21 +5,11 @@ For example, given the numbers [42, 56, 14], return 14.
 """
 
 
-def gcd(a, b, ap=None, bp=None):
+def gcd(a, b):
     """Return the gcd of a and b"""
-    if a == b:
-        return a
-    elif a < b:  # If a < b, switch a and b
-        a, b = b, a
-
-    if a % b == 0:
-        return b
-    if not ap and not bp:
-        ap, bp = a, b
-    if b + bp <= a:
-        return gcd(a, b + bp, ap, bp)
-    else:
-        return gcd(a + ap, b + bp, ap, bp)
+    while b:
+        a, b = b, a % b
+    return a
 
 
 def greatest_common_denominator(l: list) -> int:
