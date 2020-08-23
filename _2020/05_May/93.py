@@ -7,7 +7,7 @@ Given a tree, return the size of the largest tree/subtree that is a BST.
 from _2020 import Tree, valid_tree
 
 
-def larget_bst(t: Tree) -> Tree:
+def largest_bst(t: Tree) -> Tree:
     """Return the largest bst in a Tree"""
 
     def size_tree(t, size=0):
@@ -22,10 +22,9 @@ def larget_bst(t: Tree) -> Tree:
         return tv
 
 
-
 if __name__ == '__main__':
     vt = Tree(2, 1, 3, root=True)
     vt2 = Tree(2, Tree(2, 1), Tree(4, right=5), root=True)
 
-    # print(larget_bst(vt))
-    print(larget_bst(vt2))
+    print(largest_bst(vt))
+    print(largest_bst(vt2))
