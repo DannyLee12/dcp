@@ -10,18 +10,19 @@ subarray of distinct elements is [5, 2, 3, 4, 1].
 def longest_subarray(l: list) -> list:
     """Return the longest subarray containing distinct elements"""
     # For each position in l, get the longest sequence
-    n = len(l)
+    s = set()
     longest_list = []
-    for i in range(n):
-        s = set()
-        nl = []
-        for j in range(i, n):
-            if l[j] in s:
-                break
-            s.add(l[j])
-            nl.append(l[j])
-        if len(nl) > len(longest_list):
-            longest_list = nl
+    start = 0
+    for i, x in enumerate(l):
+        if x in s:
+            s = set()
+            if i - start > len(longest_list):
+                longest_list = l[start: i]
+            start = i
+        s.add(x)
+
+    if i + 1 - start > len(longest_list):
+        longest_list = l[start: i + 1]
 
     return longest_list
 
