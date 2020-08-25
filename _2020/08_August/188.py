@@ -23,16 +23,18 @@ How can we make it print out what we apparently want?
 
 def make_functions():
     flist = []
-    for i in [1, 2, 3]:
-        def print_i(i):
-            print(i)
 
-        flist.append((print_i, i))
+    for i in [1, 2, 3]:
+        def print_i(var):
+            def print_var():
+                print(var)
+            return print_var
+        flist.append(print_i(i))
 
     return flist
 
 
 if __name__ == '__main__':
     functions = make_functions()
-    for f, i in functions:
-        f(i)
+    for f in functions:
+        f()
