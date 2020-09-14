@@ -9,14 +9,17 @@ return ["c", "b", "a"].
 """
 
 
-def permute_array(l: list, p: list) -> list:
-    """Permute a list based on a permutation list"""
-    l2 = ['' for x in range(len(l))]
-    for i, x in enumerate(p):
-        l2[i] = l[x]
+def permute(array, permutation):
+    for i in range(len(array)):
+        element, p = array[i], permutation[i]
 
-    return l2
+        while p != i:
+            array[p], element = element, array[p]
+            permutation[p], p = p, permutation[p]
+
+        array[i], permutation[i] = element, p
+    return array
 
 
 if __name__ == '__main__':
-    print(permute_array(["a", "b", "c"], [2, 1, 0]))
+    assert permute(["a", "b", "c"], [2, 1, 0])
