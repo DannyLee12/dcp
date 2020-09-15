@@ -14,19 +14,24 @@ Bonus: What input n <= 1_000_000 gives the longest sequence?
 
 """
 
+lengths = {}
 
-def collatz(n: int, count: int=0):
-    if n == 1:
-        return count
-    if n % 2 == 0:
-        return collatz(n // 2, count + 1)
-    else:
-        return collatz(3*n + 1, count + 1)
+
+def collatz(n: int):
+    if n not in lengths:
+        if n == 1:
+            lengths[n] = 1
+        if n % 2 == 0:
+            lengths[n] = 1 + collatz(n // 2)
+        else:
+            lengths[n] = 1 + collatz(3*n + 1)
+
+    return lengths[n]
 
 
 if __name__ == '__main__':
     max_val = 0
-    for x in range(1, 1_000_00):
+    for x in range(1, 1_000_000):
         iterations = collatz(x)
         if iterations > max_val:
             print(x)
