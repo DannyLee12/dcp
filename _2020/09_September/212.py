@@ -11,8 +11,7 @@ def get_id(s: str) -> int:
     """Return the numerical value of a column"""
     x = 1
     for c in s:
-        x += ord(c) - ord("A")
-        x += 26
+        x += ord(c) - ord("A") + 26
 
     return x - 26
 
