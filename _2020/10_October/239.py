@@ -12,6 +12,8 @@ For example, 4 - 2 - 1 - 7 is a valid pattern, whereas 2 - 1 - 7 is not.
 
 Find the total number of valid unlock patterns of length N, where 1 <= N <= 9.
 """
+import timeit
+from collections import defaultdict
 
 g = {1: [2, 4, 5],
      2: [1, 3, 4, 5, 6],
@@ -26,6 +28,7 @@ g = {1: [2, 4, 5],
 
 def valid_swipes(N: int) -> int:
     """Return the number of valid swipes of length N"""
+    cache = defaultdict(int)
 
     def valid_routes(hops, node, total=0):
         """return number of valid hops from a node"""
@@ -33,16 +36,20 @@ def valid_swipes(N: int) -> int:
             return len(g[node])
 
         for n in g[node]:
-            total += valid_routes(hops - 1, n, total)
+            if f"node:{n}_hops:{hops-1}" not in cache:
+                cache[f"node:{n}_hops:{hops-1}"] = valid_routes(hops - 1, n, total)
+
+            total += cache[f"node:{n}_hops:{hops-1}"]
 
         return total
 
     total = 0
-    for x in range(1, 2):
+    for x in range(1, 10):
         total += valid_routes(N, x)
 
     return total
 
 
 if __name__ == '__main__':
-    print(valid_swipes(4))
+    print(timeit.timeit("valid_swipes(4)", setup="from __main__ import valid_swipes",
+    number=1000))
