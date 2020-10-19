@@ -19,7 +19,7 @@ from math import sqrt
 def sieve(N: int) -> list:
     """Generate a list of primes < N"""
     sieve = set()
-    for prime in range(2, int(sqrt(N))):
+    for prime in range(2, N // 2):
         if prime in sieve:
             continue  # Not a prime ;)
         val = prime * 2  # First occurrence is prime
@@ -30,5 +30,18 @@ def sieve(N: int) -> list:
     return [x for x in range(2, N) if x not in sieve]
 
 
+def prime_generator():
+    """generate primes"""
+    n = 2
+    while True:
+        for x in range(2, n):
+            if n % x == 0:
+                n += 1
+        yield n
+        n += 1
+
+
 if __name__ == '__main__':
     print(sieve(10))
+    for x in prime_generator():
+        print(x)
