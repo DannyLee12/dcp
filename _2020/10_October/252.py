@@ -12,11 +12,18 @@ def egyption_fractions(f: str) -> str:
     """Return a fraction as an egyption fraction"""
     # Assume first term < 10, 2nd term < 100 ...
     e = 0.000001
-    for t in range(1, 10):
-        for h in range(10, 100):
-            for th in range(100, 1000):
-                if abs(eval(f) - (1/t + 1/h + 1/th)) < e:
-                    return f"1/{t} + 1/{h} + 1/{th}"
+    f = eval(f)
+    counter = 0
+    i = ["0"]
+
+    while abs(f - sum(eval(x) for x in i)) > e:
+        c = counter * 10 + 1
+        while 1/c + sum(eval(x) for x in i) > f:
+            c += 1
+        i.append(f"1/{c}")
+        counter += 1
+
+    return " + ".join(i[1:])
 
 
 if __name__ == '__main__':
